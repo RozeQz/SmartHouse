@@ -23,7 +23,7 @@ void setup() {
 }
 
 void loop() {
-  stn.getData();
+  //stn.getData();
 
   char* str = stn.getJSON();
   Serial.println(str);

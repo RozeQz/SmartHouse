@@ -7,9 +7,7 @@ Station::Station(const char* str, const DHT* dht, int photoPin) : _photoPin(phot
   _dht->begin();
 }
 
-void Station::getData() {
-  myData.setBrightness(analogRead(_photoPin));
-
+int Station::getDHTData(float* temp, int* hum) {
   _dht->read();
 
   unsigned long stopAttemptsTime = millis() + DHT_CONNECTION_WAITTIME;
@@ -20,26 +18,37 @@ void Station::getData() {
   
   switch (_dht->getState()) {
     case DHT_OK:
-      myData.setTemperature(_dht->getTemperatureC());
-      myData.setHumidity(_dht->getHumidity());
-      myData.setError(0);
-      break;
+      *temp = _dht->getTemperatureC();
+      *hum = _dht->getHumidity();
+      return 0;
     case DHT_ERROR_CHECKSUM:
     case DHT_ERROR_TIMEOUT:
     case DHT_ERROR_NO_REPLY:
-      myData.setError(_dht->getState());
-      break;
+      return _dht->getState();
     default:
-      myData.setError(255);
-      break;
+      return 255;
   }
+}
+
+void Station::getDHTDataJSON(char* buf, int bufSize) {
+  float temperature;
+  int humidity, error;
+  error = getDHTData(&temperature, &humidity);
+  sprintf(buf, "{\"brightness\": %d, \"temperature\": ", getBrightness());
+  dtostrf(temperature, 4, 2, buf + strlen(buf));
+  sprintf(buf + strlen(buf), ", \"humidity\": %d, \"error\": %d}", humidity, error);
+}
+
+int Station::getBrightness() {
+  return analogRead(_photoPin);
 }
 
 char* Station::getJSON() {
   char* result = new char[128]();
   sprintf(result, "{\"stationName\": \"%.16s\", \"data\": ", _name);
 
-  char* data = myData.getJSON();
+  char data[64];
+  getDHTDataJSON(data, 64);
   strcat(result, data);
   strcat(result, "}");
   delete[] data;
