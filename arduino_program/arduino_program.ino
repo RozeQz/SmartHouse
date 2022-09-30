@@ -1,56 +1,21 @@
+// БИБЛИОТЕКИ
+
 // библиотека для работы с датчиками серии DHT
-#include <TroykaDHT.h>
-#include <string.h>
-// пин подключения фоторезистора
-#define PHOTO_PIN A0
+#include <TroykaDHT.h>  // датчик температуры и влажности
 
-class Data {
-  public:
-    int brightness;
-    float temperature;
-    float humidity;
-    char* getJSON();
-};
+#include "Station.h"    //
 
-class Station {
-  private:
-    char name[16];
-  public:
-    Data myData;
-    Station(const char* str) { strcpy(name, str); };
-    char* getJSON();
-};
+// МАКРОСЫ
 
-char* Data::getJSON() {
-  char* result = new char[64]();
-  strcat(result, "{ \"brightness\": ");
-  strcat(result, String(brightness).c_str());
-  strcat(result, ", \"temperature\": ");
-  strcat(result, String(temperature).c_str());
-  strcat(result, ", \"humidity\": ");
-  strcat(result, String(humidity).c_str());
-  strcat(result, "}");
-  return result;
-}
+#define PHOTO_PIN A0    // пин подключения фоторезистора
 
-char* Station::getJSON() {
-  char* result = new char[128]();
-  strcat(result, "{\"stationName\":\"");
-  strcat(result, name);
-  strcat(result, "\", \"data\":");
-  char* data = myData.getJSON();
-  strcat(result, data);
-  strcat(result, "}");
-  delete[] data;
-  return result;
-}
+// ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
 
-// создаём объект класса DHT
-// передаём номер пина к которому подключён датчик и тип датчика
-// типы сенсоров: DHT11, DHT21, DHT22
-DHT dht(7, DHT11);
+DHT dht(7, DHT11); // объект класса DHT - датчик температуры и влажности
 
-Station stn("Lisa's Oleg");
+Station stn("Lisa's Oleg"); // станция измерения
+
+// КОД
 
 void setup() {
   pinMode(PHOTO_PIN, INPUT);
@@ -60,15 +25,15 @@ void setup() {
 }
 
 void loop() {
-  stn.myData.brightness = analogRead(PHOTO_PIN);
+  stn.myData._brightness = analogRead(PHOTO_PIN);
   // считывание данных с датчика
   dht.read();
   // проверяем состояние данных
   switch (dht.getState()) {
     // всё OK
     case DHT_OK:
-      stn.myData.temperature = dht.getTemperatureC();
-      stn.myData.humidity = dht.getHumidity();
+      stn.myData._temperature = dht.getTemperatureC();
+      stn.myData._humidity = dht.getHumidity();
       char* str = stn.getJSON();
       Serial.println(str);
       delete[] str;
