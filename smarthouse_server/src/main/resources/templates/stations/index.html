@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+
+<div th:each="station : ${stations}">
+    <a th:href="@{/stations/{id}(id=${station.getStationID()})}"
+       th:text="${station.getStationName()}"></a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/stations/new">Create new station</a>
+
+</body>
+</html>
