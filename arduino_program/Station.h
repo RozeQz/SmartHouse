@@ -11,6 +11,7 @@
 
 class Station {
   private:
+    unsigned int _id;
     char _name[16];
     int _photoPin;
     DHT* _dht;
@@ -18,8 +19,9 @@ class Station {
     void getDHTDataJSON(char* buf, int bufSize);
     int getDHTData(float* temp, int* hum);
   public:
-    Station(const char* str, const DHT* dht, int photoPin);
+    Station(unsigned int id, const char* str, const DHT* dht, int photoPin);
     char* getJSON();
+    char* getParams();
 };
 
 #endif

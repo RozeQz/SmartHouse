@@ -1,6 +1,16 @@
 #include "Station.h"
 
-Station::Station(const char* str, const DHT* dht, int photoPin) : _photoPin(photoPin), _dht(dht) { 
+int replacechar(char *str, char orig, char rep) {
+    char *ix = str;
+    int n = 0;
+    while((ix = strchr(ix, orig)) != NULL) {
+        *ix++ = rep;
+        n++;
+    }
+    return n;
+}
+
+Station::Station(unsigned int id, const char* str, const DHT* dht, int photoPin) : _photoPin(photoPin), _dht(dht), _id(id) { 
   strcpy(_name, str);
   
   pinMode(photoPin, INPUT);
@@ -52,5 +62,21 @@ char* Station::getJSON() {
   strcat(result, data);
   strcat(result, "}");
   delete[] data;
+  return result;
+}
+
+char* Station::getParams() {
+  char* result = new char[128]();
+  char myName[16];
+  strcpy(myName, _name);
+  replacechar(myName, ' ', '+');
+  sprintf(result, "stationName=%.16s&stationID=%u&", myName, _id);
+  
+  float temperature;
+  int humidity, error;
+  error = getDHTData(&temperature, &humidity);
+  sprintf(result + strlen(result), "humidity=%d&temperature=", humidity);
+  dtostrf(temperature, 4, 2, result + strlen(result));
+  
   return result;
 }

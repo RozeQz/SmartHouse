@@ -4,6 +4,7 @@
 #include <TroykaDHT.h>  // датчик температуры и влажности
 
 #include "Station.h"    //
+#include "WifiMagic.h"  //
 
 // МАКРОСЫ
 
@@ -13,22 +14,35 @@
 
 DHT dht(7, DHT11); // объект класса DHT - датчик температуры и влажности
 
-Station stn("Lisa's Oleg", &dht, PHOTO_PIN); // станция измерения
+Station stn(808, "Lisa", &dht, PHOTO_PIN); // станция измерения
 
 // КОД
 
 void setup() {
   // открываем последовательный порт для мониторинга действий в программе
   Serial.begin(9600);
+  setup_wifi();
 }
 
 void loop() {
   //stn.getData();
 
-  char* str = stn.getJSON();
-  Serial.println(str);
-  delete[] str;
+  static bool doGetData = true;
+  if ((millis()/1000%15 == 9) && doGetData) {
+    //Serial.println("Start sending data...");
+    char* str = stn.getParams();
+    
+    Serial.println(str);
 
-  // ждём две секунды
-  delay(2000);
+    send_data(str);
+    
+    delete[] str;
+    doGetData = false;
+    //Serial.println("End sending data");
+  }
+  if (millis()/1000%15 == 8) {
+    doGetData = true;
+  }
+
+  loop_wifi();
 }
