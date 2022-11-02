@@ -16,7 +16,11 @@ void setup_wifi() {
 void connect_wifi() {
   WIFI_SERIAL.print("AT+CWMODE_DEF=3\r\n");
   wait_for_module();
-  WIFI_SERIAL.print("AT+CWJAP=\"wifi\",\"pass\"\r\n");
+  WIFI_SERIAL.print("AT+CWJAP=\"");
+  WIFI_SERIAL.print(SSID);
+  WIFI_SERIAL.print("\",\"");
+  WIFI_SERIAL.print(PASSWORD);
+  WIFI_SERIAL.print("\"\r\n");
   wait_for_module();
 }
 
@@ -32,7 +36,9 @@ void wait_for_module() {
 }
 
 void send_data(const char* str) {
-  WIFI_SERIAL.print("AT+CIPSTART=\"TCP\",\"192.168.1.10\",3000\r\n");
+  WIFI_SERIAL.print("AT+CIPSTART=\"TCP\",\"");
+  WIFI_SERIAL.print(SERVER_IP);
+  WIFI_SERIAL.print("\",3000\r\n");
   delay(500);
   WIFI_SERIAL.print("AT+CIPSEND=");
   WIFI_SERIAL.print(strlen(str)+96+String(strlen(str)).length());

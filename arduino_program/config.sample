@@ -1,0 +1,6 @@
+#pragma once
+
+#define SSID "" // Wifi name
+#define PASSWORD "" // Wifi password
+
+#define SERVER_IP "" // server IP address

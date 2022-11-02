@@ -1,6 +1,8 @@
 #ifndef WIFIMAGIC_H
 #define WIFIMAGIC_H
 
+#include "config.cpp"
+
 void setup_wifi();
 void connect_wifi();
 void loop_wifi();
