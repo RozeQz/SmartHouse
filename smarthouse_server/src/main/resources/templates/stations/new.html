@@ -12,8 +12,8 @@
     <div style="color:red" th:if="${#fields.hasErrors('stationID')}" th:errors="*{stationID}">stationID Error</div>
     <br/>
 
-    <label for="name">Enter station name: </label>
-    <input type="text" th:field="*{stationName}" id="name"/>
+    <label for="stationName">Enter station name: </label>
+    <input type="text" th:field="*{stationName}" id="stationName"/>
     <div style="color:red" th:if="${#fields.hasErrors('stationName')}" th:errors="*{stationName}">Name Error</div>
     <br/>
 

@@ -2,7 +2,6 @@ package com.SmartTech.Smarthouse.controllers;
 
 import com.SmartTech.Smarthouse.dao.StationDAO;
 import com.SmartTech.Smarthouse.models.StationData;
-//import com.SmartTech.Smarthouse.repositories.StationDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +33,7 @@ public class StationsController {
     }
 
     @GetMapping("/new")
-    public String newPerson(@ModelAttribute("station") StationData station) {
+    public String newStation(@ModelAttribute("station") StationData station) {
         return "stations/new";
     }
 

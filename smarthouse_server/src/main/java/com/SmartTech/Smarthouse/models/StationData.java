@@ -1,36 +1,29 @@
 package com.SmartTech.Smarthouse.models;
 
-import lombok.Data;
-
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-@Entity                               // Вместо геттеров и сеттеров
+@Entity
+@Table(name = "Stations")
 public class StationData {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    @Column(nullable = false)
+    private Long id;
     private Integer stationID;
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 50, message = "Name should be between 2 and 50 characters")
-    @Column(nullable = false)
     private String stationName;
-    @Column
     private float temperature;
-    @Column
     private int brightness;
-    @Column
     private int humidity;
-    @Column
     private boolean error;
 
     public StationData() {
     }
 
-    public StationData(int stationID, String stationName, float temperature, int brightness, int humidity, boolean error) {
+    public StationData(Long id, int stationID, String stationName, float temperature, int brightness, int humidity, boolean error) {
+        this.id = id;
         this.stationID = stationID;
         this.stationName = stationName;
         this.temperature = temperature;
@@ -39,7 +32,7 @@ public class StationData {
         this.error = error;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
