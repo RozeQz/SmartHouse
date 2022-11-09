@@ -50,7 +50,7 @@ public class StationsController {
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
         stationDAO.delete(id);
-        return "redirect:stations/";
+        return "redirect:/stations";
     }
 
 }

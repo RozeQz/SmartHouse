@@ -15,11 +15,11 @@
     <p th:text="${'Humidity: ' + station.getHumidity()}">HUMIDITY</p>
 </div>
 
-<a th:href="@{/stations/{id}/edit(id=${stations[0].getStationID()})}">Edit</a>
-
 <form th:method="DELETE" th:action="@{/stations/{id}(id=${stations[0].getStationID()})}">
-    <input type="submit" value="Delete"/>
+    <button type="submit" id="submitButton">Delete</button>
 </form>
+
+<a href="/stations">Back to list of stations</a>
 
 </body>
 </html>
