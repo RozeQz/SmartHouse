@@ -13,8 +13,6 @@ img{
     margin: auto;
 }
 div.slider-nav {
-    /*border-style:solid;*/
-    /*border: 2px ridge rgb(128, 90, 128);*/
     border: 4mm ridge rgba(211, 220, 50, .6);
     background-color: antiquewhite;
     height: auto;
