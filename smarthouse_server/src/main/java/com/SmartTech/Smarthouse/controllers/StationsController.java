@@ -32,16 +32,11 @@ public class StationsController {
         return "stations/show";
     }
 
-    @GetMapping("/new")
-    public String newStation(@ModelAttribute("station") StationData station) {
-        return "stations/new";
-    }
-
     @PostMapping()
     public String create(@ModelAttribute("station") @Valid StationData station,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "stations/new";
+            return "stations/index";
 
         stationDAO.save(station);
         return "redirect:/stations";
