@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -14,6 +13,7 @@
     </div>
 
     <div th:each="station : ${stations}">
+        <p th:text="${'Datetime: ' + station.getDatetime()}">DATETIME</p>
         <p th:text="${'Temperature: ' + station.getTemperature()}">TEMPERATURE</p>
         <p th:text="${'Brightness: ' + station.getBrightness()}">BRIGHTNESS</p>
         <p th:text="${'Humidity: ' + station.getHumidity()}">HUMIDITY</p>

@@ -6,5 +6,6 @@ CREATE TABLE Stations (
     temperature FLOAT,
     brightness INTEGER,
     humidity INTEGER,
+    datetime TIMESTAMP,
     error BOOLEAN
 );

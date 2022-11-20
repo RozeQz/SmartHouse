@@ -17,18 +17,20 @@ public class StationData {
     private float temperature;
     private int brightness;
     private int humidity;
+    private String datetime;
     private boolean error;
 
     public StationData() {
     }
 
-    public StationData(Long id, int stationID, String stationName, float temperature, int brightness, int humidity, boolean error) {
+    public StationData(Long id, int stationID, String stationName, float temperature, int brightness, int humidity, String datetime, boolean error) {
         this.id = id;
         this.stationID = stationID;
         this.stationName = stationName;
         this.temperature = temperature;
         this.brightness = brightness;
         this.humidity = humidity;
+        this.datetime = datetime;
         this.error = error;
     }
 
@@ -74,6 +76,14 @@ public class StationData {
 
     public void setHumidity(int humidity) {
         this.humidity = humidity;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 
     public boolean isError() {

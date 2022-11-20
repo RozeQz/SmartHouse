@@ -22,7 +22,7 @@ public class StationDAO {
     }
 
     public List<StationData> stationById(int id) {
-        return jdbcTemplate.query("SELECT * FROM Stations WHERE stationID=?", new Object[]{id}, new BeanPropertyRowMapper<>(StationData.class));
+        return jdbcTemplate.query("SELECT * FROM Stations WHERE stationID=? ORDER BY datetime DESC", new Object[]{id}, new BeanPropertyRowMapper<>(StationData.class));
     }
 
     public StationData dataById(int id) {
@@ -31,8 +31,8 @@ public class StationDAO {
     }
 
     public void save(StationData station) {
-        jdbcTemplate.update("INSERT INTO Stations(stationName, temperature, brightness, humidity, error, stationID) VALUES(?, ?, ?, ?, ?, ?)", station.getStationName(),
-                station.getTemperature(), station.getBrightness(), station.getHumidity(), station.isError(), station.getStationID());
+        jdbcTemplate.update("INSERT INTO Stations(stationID, stationName, temperature, brightness, humidity, datetime, error) VALUES(?, ?, ?, ?, ?, ?, ?)", station.getStationID(), station.getStationName(),
+                station.getTemperature(), station.getBrightness(), station.getHumidity(), station.getDatetime(), station.isError());
     }
 
     public void delete(int id) {
