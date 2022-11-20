@@ -10,10 +10,10 @@ int replacechar(char *str, char orig, char rep) {
     return n;
 }
 
-Station::Station(unsigned int id, const char* str, const DHT* dht, int photoPin) : _photoPin(photoPin), _dht(dht), _id(id) { 
+Station::Station(unsigned int id, const char* str, const DHT* dht, int photoPin, const iarduino_RTC* myclock) : _photoPin(photoPin), _dht(dht), _id(id), _clock(myclock) { 
   strcpy(_name, str);
-  
   pinMode(photoPin, INPUT);
+
   _dht->begin();
 }
 
@@ -66,7 +66,7 @@ char* Station::getJSON() {
 }
 
 char* Station::getParams() {
-  char* result = new char[128]();
+  char* result = new char[160]();
   char myName[16];
   strcpy(myName, _name);
   replacechar(myName, ' ', '+');
@@ -77,6 +77,6 @@ char* Station::getParams() {
   error = getDHTData(&temperature, &humidity);
   sprintf(result + strlen(result), "humidity=%d&temperature=", humidity);
   dtostrf(temperature, 4, 2, result + strlen(result));
-  
+  sprintf(result + strlen(result), "&datetime=%s", _clock->gettime("d-m-Y.+H-i-s"));
   return result;
 }
