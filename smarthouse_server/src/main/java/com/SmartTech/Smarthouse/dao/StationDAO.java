@@ -31,7 +31,7 @@ public class StationDAO {
     }
 
     public void save(StationData station) {
-        jdbcTemplate.update("INSERT INTO Stations(stationID, stationName, temperature, brightness, humidity, datetime, error) VALUES(?, ?, ?, ?, ?, ?, ?)", station.getStationID(), station.getStationName(),
+        jdbcTemplate.update("INSERT INTO Stations(stationID, stationName, temperature, brightness, humidity, datetime, error) VALUES(?, ?, ?, ?, ?, to_timestamp(?, 'DD-MM-YYYY. HH24-MI-SS'), ?)", station.getStationID(), station.getStationName(),
                 station.getTemperature(), station.getBrightness(), station.getHumidity(), station.getDatetime(), station.isError());
     }
 

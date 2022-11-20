@@ -12,11 +12,13 @@
         <div th:text="${'Имя станции: ' + stations[0].getStationName()}">NAME</div>
     </div>
 
+    <button style="margin: 4px;padding: 2px;"><a href="/stations">Назад</a></button>
+
     <div th:each="station : ${stations}">
         <p th:text="${'Datetime: ' + station.getDatetime()}">DATETIME</p>
-        <p th:text="${'Temperature: ' + station.getTemperature()}">TEMPERATURE</p>
+        <p th:text="${'Temperature: ' + station.getTemperature() + '°C'}">TEMPERATURE</p>
         <p th:text="${'Brightness: ' + station.getBrightness()}">BRIGHTNESS</p>
-        <p th:text="${'Humidity: ' + station.getHumidity()}">HUMIDITY</p>
+        <p th:text="${'Humidity: ' + station.getHumidity() + '%'}">HUMIDITY</p>
         <hr/>
     </div>
 
