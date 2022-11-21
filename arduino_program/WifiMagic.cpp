@@ -2,8 +2,8 @@
 #include <Arduino.h>
 
 #include <SoftwareSerial.h>
- 
-SoftwareSerial mySerial(8, 9);
+
+SoftwareSerial mySerial(ESP_RX, ESP_TX);
 
 #define WIFI_SERIAL    mySerial
 
@@ -55,7 +55,7 @@ void send_data(const char* str) {
   //WIFI_SERIAL.print("AT+CIPCLOSE");
   //wait_for_module();
 }
- 
+
 void loop_wifi() {
   // если приходят данные из Wi-Fi модуля - отправим их в порт компьютера
   if (WIFI_SERIAL.available()) {
@@ -65,5 +65,5 @@ void loop_wifi() {
   if (WIFI_SERIAL.available()) {
     Serial.write(WIFI_SERIAL.read());
   }
-  
+
 }
