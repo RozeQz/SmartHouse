@@ -12,7 +12,11 @@
         <div th:text="${'Имя станции: ' + stations[0].getStationName()}">NAME</div>
     </div>
 
-    <button style="margin: 4px;padding: 2px;"><a href="/stations">Назад</a></button>
+    <button style="margin: 4px;padding: 2px; width: 70px"><a href="/stations">Назад</a></button>
+
+    <form th:method="DELETE" th:action="@{/stations/{id}(id=${stations[0].getStationID()})}">
+        <button style="margin: 4px;padding: 2px; width: 70px" type="submit" id="submitButton">Удалить</button>
+    </form>
 
     <th:block layout:fragment="script">
         <script th:inline="javascript">
@@ -24,13 +28,7 @@
     </th:block>
 
     <div class="canvasContainer">
-        <canvas id="tempChart" class="chart"></canvas>
-    </div>
-    <div class="canvasContainer">
-        <canvas id="brChart" class="chart"></canvas>
-    </div>
-    <div class="canvasContainer">
-        <canvas id="humChart" class="chart"></canvas>
+        <canvas id="lineChart" class="chart"></canvas>
     </div>
 
     <div th:each="station : ${stations}">
@@ -41,10 +39,5 @@
         <hr/>
     </div>
 
-    <form th:method="DELETE" th:action="@{/stations/{id}(id=${stations[0].getStationID()})}">
-        <button type="submit" id="submitButton">Delete</button>
-    </form>
-
-    <a href="/stations">Назад</a>
 </body>
 </html>
