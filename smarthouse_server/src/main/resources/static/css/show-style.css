@@ -10,3 +10,10 @@ div.info-header {
     font-size: x-large;
 }
 
+.chart {
+    max-width: 800px;
+    min-width: 800px;
+    max-height: 400px;
+    min-height: 400px;
+}
+
