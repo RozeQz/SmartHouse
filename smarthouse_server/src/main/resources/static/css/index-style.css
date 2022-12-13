@@ -1,0 +1,38 @@
+.slider-for{
+    width: 500px;
+    margin: 5px auto 1px;
+    overflow: hidden;
+}
+img{
+    width: 100%;
+    min-height: 100%;
+}
+.slider-nav{
+    width: 500px;
+    height: 85px;
+    margin: auto;
+}
+div.slider-nav {
+    border: 4mm ridge rgba(211, 220, 50, .6);
+    background-color: antiquewhite;
+    height: auto;
+}
+div.caption-letter {
+    font-size: xxx-large;
+    text-align: center;
+}
+.slider-nav .slick-track{
+    height: 85px;
+}
+.slick-arrow{
+    position: absolute;
+    top: 50%;
+    z-index: 50;
+    margin-top: -12px;
+}
+.slick-prev{
+    left: 0;
+}
+.slick-next{
+    right: 0;
+}
