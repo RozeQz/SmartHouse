@@ -10,3 +10,14 @@
 - необходимо проработать механизм действий как датчиков, так и сервера в случае временного отказа других составл€ющих частей системы.
 
 ѕриложение должно содержать полный набор тестов, позвол€ющих проверить все аспекты его функционировани€.
+
+## ”стновка и запуск
+
+```
+git clone https://github.com/RozeQz/SmartHouse.git
+sudo apt update
+sudo apt install openjdk-11-jdk
+sudo apt install maven
+cd smarthouse_server
+mvn spring-boot:run
+```
