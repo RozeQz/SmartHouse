@@ -4,23 +4,35 @@ $(document).ready(function () {
     var data_br = data.map(x => x["brightness"]);
     var data_hum = data.map(x => x["humidity"]);
 
-    var lineChart = {
+    var lineChartTemp = {
         labels: data_x,
         datasets: [
             {
-                label: "Temperature",
+                label: "Температура",
                 borderColor: "rgba(227, 153, 87, 1)",
                 backgroundColor: "rgba(227, 153, 87, 0.5)",
                 data: data_temp
             },
+        ]
+    };
+
+    var lineChartBr = {
+        labels: data_x,
+        datasets: [
             {
-                label: "Brightness",
+                label: "Яркость",
                 borderColor: "rgba(63, 173, 127, 1)",
                 backgroundColor: "rgba(63, 173, 127, 0.5)",
                 data: data_br
             },
+        ]
+    };
+
+    var lineChartHum = {
+        labels: data_x,
+        datasets: [
             {
-                label: "Humidity",
+                label: "Влажность",
                 borderColor: "rgba(123, 105, 150, 1)",
                 backgroundColor: "rgba(123, 105, 150, 0.5)",
                 data: data_hum
@@ -28,5 +40,7 @@ $(document).ready(function () {
         ]
     };
 
-    new Chart(document.getElementById("lineChart").getContext("2d"), {type: 'line', data: lineChart });
+    new Chart(document.getElementById("tempChart").getContext("2d"), {type: 'line', data: lineChartTemp });
+    new Chart(document.getElementById("brChart").getContext("2d"), {type: 'line', data: lineChartBr });
+    new Chart(document.getElementById("humChart").getContext("2d"), {type: 'line', data: lineChartHum });
 });

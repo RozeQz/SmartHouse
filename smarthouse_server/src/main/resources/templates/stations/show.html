@@ -28,15 +28,23 @@
     </th:block>
 
     <div class="canvasContainer">
-        <canvas id="lineChart" class="chart"></canvas>
+        <canvas id="tempChart" class="chart"></canvas>
+    </div>
+    <div class="canvasContainer">
+        <canvas id="brChart" class="chart"></canvas>
+    </div>
+    <div class="canvasContainer">
+        <canvas id="humChart" class="chart"></canvas>
     </div>
 
+    <h3>Список данных: </h3>
+
     <div th:each="station : ${stations}">
-        <p th:text="${'Datetime: ' + station.getDatetime()}">DATETIME</p>
-        <p th:text="${'Temperature: ' + station.getTemperature() + '°C'}">TEMPERATURE</p>
-        <p th:text="${'Brightness: ' + station.getBrightness()}">BRIGHTNESS</p>
-        <p th:text="${'Humidity: ' + station.getHumidity() + '%'}">HUMIDITY</p>
         <hr/>
+        <p th:text="${'Дата: ' + station.getDatetime()}">DATETIME</p>
+        <p th:text="${'Температура: ' + station.getTemperature() + '°C'}">TEMPERATURE</p>
+        <p th:text="${'Яркость: ' + station.getBrightness()}">BRIGHTNESS</p>
+        <p th:text="${'Влажность: ' + station.getHumidity() + '%'}">HUMIDITY</p>
     </div>
 
 </body>
