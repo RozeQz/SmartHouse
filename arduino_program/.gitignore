@@ -1,0 +1,4 @@
+*.cfg
+*.tmp
+config.*
+!*.sample
