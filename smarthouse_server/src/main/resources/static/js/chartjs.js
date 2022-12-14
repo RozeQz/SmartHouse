@@ -1,8 +1,8 @@
 $(document).ready(function () {
     var data_x = data.map(x => x["datetime"]).reverse();
-    var data_temp = data.map(x => x["temperature"]);
-    var data_br = data.map(x => x["brightness"]);
-    var data_hum = data.map(x => x["humidity"]);
+    var data_temp = data.map(x => x["temperature"]).reverse();
+    var data_br = data.map(x => x["brightness"]).reverse();
+    var data_hum = data.map(x => x["humidity"]).reverse();
 
     var lineChartTemp = {
         labels: data_x,
